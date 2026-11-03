@@ -1,3 +1,5 @@
+document.documentElement.classList.add('has-js');
+
 const menuButton = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 
@@ -13,6 +15,26 @@ navLinks?.querySelectorAll('a').forEach(link => {
     menuButton?.setAttribute('aria-expanded', 'false');
     menuButton?.setAttribute('aria-label', 'باز کردن منو');
   });
+});
+
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && navLinks?.classList.contains('open')) {
+    navLinks.classList.remove('open');
+    menuButton?.setAttribute('aria-expanded', 'false');
+    menuButton?.setAttribute('aria-label', 'باز کردن منو');
+    menuButton?.focus();
+  }
+});
+
+document.addEventListener('click', event => {
+  if (navLinks?.classList.contains('open') &&
+      !navLinks.contains(event.target) &&
+      !menuButton?.contains(event.target)) {
+    navLinks.classList.remove('open');
+    menuButton?.setAttribute('aria-expanded', 'false');
+    menuButton?.setAttribute('aria-label', 'باز کردن منو');
+  }
 });
 
 const year = document.getElementById('year');
