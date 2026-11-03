@@ -214,7 +214,7 @@ button{font:inherit}
     left: auto;
     top: 50%;
     bottom: auto;
-    transform: translateY(50%);
+    transform: translateY(-50%);
     align-items: flex-end;
   }
 }
