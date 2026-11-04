@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://javidrahmati53.github.io/javidstudio/sitemap.xml
