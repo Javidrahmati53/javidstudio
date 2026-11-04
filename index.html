@@ -179,7 +179,9 @@ nav.solid{background:rgba(7,6,23,.72);backdrop-filter:blur(16px);-webkit-backdro
 .info a span:first-child{direction:ltr}
 form{padding:34px;display:grid;gap:18px}
 .fld{position:relative}
-.fld input,.fld textarea{width:100%;padding:22px 16px 8px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.04);outline:0;transition:.3s;resize:vertical}
+.fld input,.fld textarea,.fld select{width:100%;padding:22px 16px 8px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.04);outline:0;transition:.3s;resize:vertical}
+.fld select{padding:14px 16px;color:var(--ink);background-color:#100e2d}
+.fld select option{background:#100e2d;color:var(--ink)}
 .fld label{position:absolute;right:16px;top:14px;color:var(--mute);pointer-events:none;transition:.25s;font-size:.95rem}
 .fld input:focus,.fld textarea:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(34,230,208,.12)}
 .fld input:focus+label,.fld input:not(:placeholder-shown)+label,.fld textarea:focus+label,.fld textarea:not(:placeholder-shown)+label{top:2px;font-size:.72rem;color:var(--teal)}
@@ -354,6 +356,13 @@ footer b{direction:ltr;display:inline-block;color:var(--ink)}
     <form class="glass rv" id="form" novalidate>
       <div class="fld"><input id="fn" placeholder=" " autocomplete="name"><label for="fn">نام شما</label><div class="err">نام را وارد کنید.</div></div>
       <div class="fld"><input id="fe" type="email" placeholder=" " autocomplete="email" dir="ltr" style="text-align:right"><label for="fe">ایمیل</label><div class="err">یک ایمیل معتبر وارد کنید.</div></div>
+      <div class="fld">
+        <label for="fs" style="position:static;display:block;margin:0 0 8px;color:var(--mute)">نوع خدمت موردنظر</label>
+        <select id="fs" required>
+          <option value="">انتخاب کنید</option>
+          <option>طراحی سایت</option><option>طراحی گرافیک</option><option>اپلیکیشن</option><option>بازی</option><option>ساخت ربات تلگرام</option><option>مشاوره / سایر موارد</option>
+        </select>
+      </div>
       <div class="fld"><textarea id="fm" rows="4" placeholder=" "></textarea><label for="fm">درباره پروژه‌تان بنویسید</label><div class="err">حداقل ۱۰ حرف بنویسید.</div></div>
       <button class="btn main" type="submit">ارسال پیام</button>
       <div class="ok" id="ok" role="status"></div>
@@ -431,7 +440,7 @@ footer b{direction:ltr;display:inline-block;color:var(--ink)}
     if(FORM_ENDPOINT.indexOf("YOUR_FORM_ID")>-1){say("ارسال فرم هنوز فعال نشده است. فعلاً از واتساپ یا تلگرام پیام بدهید.",true);return}
     btn.disabled=true;btn.style.opacity=".6";
     fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},
-      body:JSON.stringify({name:$("#fn").value.trim(),email:$("#fe").value.trim(),message:$("#fm").value.trim()})})
+      body:JSON.stringify({name:$("#fn").value.trim(),email:$("#fe").value.trim(),service:$("#fs").value,message:$("#fm").value.trim()})})
     .then(function(r){if(!r.ok)throw 0;say("پیام شما ارسال شد. به‌زودی با شما تماس می‌گیریم.");form.reset()})
     .catch(function(){say("ارسال انجام نشد. دوباره تلاش کنید یا از واتساپ و تلگرام پیام بدهید.",true)})
     .then(function(){btn.disabled=false;btn.style.opacity=""})});
